@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+/* 전체 선택자 : 초기화 세팅 */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* ID 선택자 */
+#green {
+    color: green;
+}
+#blue {
+    color: blue;
+}
+#purple {
+    color: purple;
+}
+#red {
+    color: red;
+}
+
+/* Class 선택자 */
+.beverage {
+    padding: 10px;
+    margin: 10px;
+}
+.beverage.green {
+    background-color: lightgreen;
+}
+.beverage.blue {
+    background-color: lightblue;
+}
+.beverage.purple {
+    background-color: lightpink;
+}
+.beverage.red {
+    background-color: lightcoral;
+}
+
+/* 태그 선택자 */
+h2 {
+    color: red;
+}
+/* Pseudo Class */
+a:link {
+    color: blue;
+}
+a:hover {
+    font-weight: bold;
+    background-color: pink;
+}
+a:active {
+    font-weight: bold;
+    color: red;
+}
+a:visited {
+    color: grey;
+}
