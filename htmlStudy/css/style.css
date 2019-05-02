@@ -26,16 +26,16 @@
     margin: 10px;
 }
 .beverage.green {
-    background-color: lightgreen;
+    background-color: rgba(0, 127, 0, 0.2);
 }
 .beverage.blue {
-    background-color: lightblue;
+    background-color: #0000FF24;
 }
 .beverage.purple {
     background-color: lightpink;
 }
 .beverage.red {
-    background-color: lightcoral;
+    background-color: #FF000024;
 }
 
 /* 태그 선택자 */
@@ -56,4 +56,106 @@ a:active {
 }
 a:visited {
     color: grey;
+}
+/* 구조선택자 */
+.menu > li:first-child {
+    background-color: lightgreen;
+}
+.menu > li:last-child {
+    background-color: red;
+}
+.menu > li:nth-child(2) {
+    background-color: blue;
+}
+.menu > li:nth-child(3) {
+    background-color: purple;
+}
+
+/* font size는 default가 16px */
+/* %나 em은 기본사이즈의 배율로 16px은 100%, 1em임 */
+/* size */
+.menu > li:first-child {
+    /* 기준사이즈: 16px */
+    font-size: 24px;
+}
+.menu > li:nth-child(2) {
+    font-size: 24px;
+}
+.menu > li:nth-child(3) {
+    font-size: 150%;
+}
+.menu > li:last-child {
+    font-size: 1.5em;
+}
+
+/* padding과 margin */
+/* 
+    padding: 20px 30px 40px 50px
+    위 기준으로 위쪽 오른쪽 아래쪽 왼쪽
+    padding: 20px 30px;
+    위 기준으로 상하, 좌우
+*/
+.beverage.green {
+    padding: 30px;
+}
+.beverage.blue {
+    padding: 10px 20px 30px 40px;
+}
+.beverage.purple {
+    padding: 10px 20px;
+}
+
+/* border 테두리*/
+.beverage  {
+    /* border-width: 3px;
+    border-style: dotted;
+    border-color: gray; */
+    border: 3px dotted grey;
+    min-height: 150px; 
+}
+
+img.round {
+    /* 좌상단, 우상단, 우하단, 좌하단 순 */
+    /* border-radius: 20px 10px 5px 4px; */
+    /* 좌상단, 우하단 | 우상단, 좌하단*/
+    /* border-radius: 20px 10px; */
+    
+    /* border-radius: 20px;
+    border-top-right-radius: 30px; */
+
+    border-radius: 50%;
+}
+
+
+/* background */
+.penguin {
+    /* 
+    background-image: url("/images/Landscape.jpg");
+    background-position: bottom;
+    background-size: 100%;
+    background-repeat: repeat;
+    background-attachment: scroll;
+     */
+    background: url("/images/Landscape.jpg") bottom / 100% repeat scroll;
+}
+
+/* font */
+header h1 {
+    font-family: "없는 글꼴", 굴림, serif;
+}
+
+/* float */
+.menu > li {
+    width: 100px;
+    height: 40px;
+    margin-right: 5px;
+    float: right;
+    text-align: center;
+    /* 불릿 문자 없애기 */
+    list-style-type: none;
+}
+
+.beverage img {
+    float: left;
+    margin: 10px;
 }

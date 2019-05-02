@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Position</title>
+        <style>
+            .container {
+                border: 2px solid;
+                height: 100px;
+                margin-top: 50px;
+                position: relative;
+                overflow-y: scroll;
+            }
+            .box {
+                width: 100px;
+                height: 100px;
+                border: 1px solid black;
+                position: absolute; /* 절대 좌표 */
+            }
+            .box:first-child {
+                background-color: red;
+
+            }
+            .box:nth-child(2) {
+                background-color: green;
+                left: 50px;
+                top: 50px;
+                z-index: 10;
+            }
+            .box:last-child {
+                background-color: blue;
+                left: 100px;
+                top: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="box"></div>
+            <div class="box"></div>
+            <div class="box"></div>
+        </div>
+    </body>
+</html>
