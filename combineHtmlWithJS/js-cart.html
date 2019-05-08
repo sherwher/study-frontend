@@ -9,6 +9,7 @@
             }
         </style>
     </head>
+    <!-- 입력, 삭제 -->
     <body>
         <div id="header">
             <h1>Shopping List</h1>
@@ -28,4 +29,52 @@
             &copy;Bit Academy
         </div>
     </body>
+    <script>
+        function addItem() {
+            // 1. input 요소를 찾아서 안쪽의 값을 확인
+            var itemInput = document.getElementById('item');
+            var item = itemInput.value.trim();
+            // 2. 내용이 있다면 li 노드 새로 만들어서
+            if( item.length > 0) {
+                // 새 노드 생성
+                var itemNode = document.createElement('li');
+                // 컨텐츠 추가
+                itemNode.innerText = item;
+                // 3. ul#list에 자식으로 등록
+                var container = document.getElementById('list');
+                container.appendChild(itemNode);
+                // input#item 내용을 지우고
+                itemInput.value = "";
+                itemInput.focus();
+
+                // li 안쪽에 toolbar로 활용할 수 있는 div
+                var toolbar = document.createElement('div');
+                toolbar.style.display = "inline";
+                toolbar.style.float = "right";
+                // div 안쪽에 삭제 버튼을 생성
+                var delBtn = document.createElement('button');
+                delBtn.innerText = "삭제";
+                
+                toolbar.appendChild(delBtn);
+                itemNode.appendChild(toolbar);
+
+                delBtn.addEventListener('click', function(event) {
+                    console.log(event.target); 
+                    console.log(event.target.parentNode.parentNode);
+                    // li
+                    var removeItem = event.target.parentNode.parentNode;
+                    // 부모로부터 삭제
+                    removeItem.parentNode.removeChild(removeItem);
+                });
+            } 
+        }
+
+        // 초기화 : load
+        window.addEventListener('load', function(event){
+            // #btn-add에 click 리스너 부착
+            document.getElementById('btn-add')
+                .addEventListener('click', addItem);
+        });
+
+    </script>
 </html>

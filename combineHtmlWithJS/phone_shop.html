@@ -31,7 +31,7 @@
 
 <body>
     <div id="product-info">
-        <img id="main-image" src="images/iphone-xs.jpeg" class="selected" title="iPhones XS">
+        <img id="main-image" src="images/iphone-xs.jpeg" class="selected" title="iPhones XS" onclick="alert(this.title)">
         <h2>iPhone Xs</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
             magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -68,6 +68,32 @@
         }
 
     }
-    testAttribute();
+    //testAttribute();
+
+    document.getElementById("keyword").onkeypress = function(event) {
+        console.log(event);
+        console.log("Event: ", event.type);
+        console.log("Target: ", event.key);
+        // Event별로 다른 데이터가 넘어옴(한글은 발생하지 않음)
+        console.log("Keycode: ", event.keyCode);
+    }
+
+    // window load 이벤트를 이용한 초기화
+    window.addEventListener('load', function(event) {
+        // 문서내의 모든 객체 접근 가능
+        var products = document.getElementsByClassName("sub-image");
+        for(var i = 0; i < products.length; i++) {
+            console.log(products[i]);
+            var obj = products[i];
+            obj.addEventListener('click', function(event) {
+                var source = event.target; // 이벤트 발생 객체
+                // 메인 이미지 객체 찾기
+                var main = document.getElementById("main-image");
+                main.setAttribute('src', source.getAttribute('src'));
+                main.setAttribute('title', source.getAttribute('title'));
+                document.querySelector('#product-info h2').innerText = source.getAttribute('title');
+            });
+        }
+    });
 </script>
 </html>
