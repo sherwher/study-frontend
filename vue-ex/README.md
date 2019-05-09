@@ -69,3 +69,16 @@
 ### Vue는 React가 도입했던 Virtual DOM 개념을 차용, DOM의 일부를 복사본으로 만들어 두고, Virtual DOM에서 대부분의 Binding과 Rendering 작업을 수행한 후 최종적으로 실제 DOM에 반영(실제 DOM의 변경 최소화, 성능 개선)
 
 
+## Vue Instance : Instance Lifecycle
+### created 
+ - data 속성과 method 속성의 정의
+ - 데이터 요청 로직 수행에 적합한 단계
+### mounted
+ - 화면 요소에 인스턴스 부착
+ - 화면 요소 제어 로직 수행에 적합 단계
+### updated
+ - 데이터 변경 후 화면 요소 변경 완료
+ - 데이터 변경 후 화면 요소 제어에 적합
+### destroyed
+ - 뷰 인스턴스 파괴 후 호출
+ - 뷰 인스턴스와 하위 인스턴스들이 모두 제거

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Componenet EX</title>
+    <!-- Vue.js 로드 -->
+    <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <global-header></global-header><!-- 전역 컴포넌트 -->
+        <h2>{{ content }}</h2>
+        <hr>
+        <!-- 지역 컴포넌트 -->
+        <local-component v-bind:propsdata="message" v-on:send-msg="receiveMsg"></local-component>
+    </div>
+    <div id="eventBusEx">
+        <h2>EventBus Receiver</h2>
+        <p>{{ message }}</p>
+    </div>
+    <script>
+        // eventBus 객체 생성
+        var eventBus = new Vue();
+
+        // 전역 컴포넌트
+        Vue.component("global-header", {
+            template: "<div><h1>{{ title }}</h1></div>",
+            data: function() {
+                return {
+                    title: "Global-Header"
+                }
+            }
+        });
+        // 지역 컴포넌트
+        var cmp1 = {
+            props: ['propsdata'], // props로 부모에게 받을 객체
+            template: 
+                    `
+                    <div>
+                        <h2>
+                            Local Componenet
+                        </h2>
+                        <p>{{ propsdata }}</p>
+                        <button v-on:click="sendMsg">Send Message</button>
+                    </div>
+                    `,
+            methods: {
+                sendMsg: function() {
+                    this.$emit('send-msg', "Message from Child");
+                    eventBus.$emit('triggerEventBus', 'Message from Other Component');
+                }
+            }
+        }
+        // Vue Instance
+        new Vue({
+            el: "#app",
+            data: {
+                content: "Vue Instance",
+                message: "Message From Parent"
+            },
+            components: { // 로컬 컴포넌트 등록
+                'local-component': cmp1
+            },
+            methods: {
+                receiveMsg: function(message) {
+                    // 받는 인자가 없으나 받음
+                    console.log(event);
+                    console.log("Signal From Child");
+                    alert(message);
+                    
+                }
+            }
+        });
+        // Receiver Vue 객체
+        var eventBusEx = new Vue({
+            el: "#eventBusEx",
+            data: {
+                message: "Waiting for Message"
+            },
+            created: function(){
+                var instance = this;
+                eventBus.$on('triggerEventBus', function(message){
+                    console.log(this);
+                    console.log(message);
+                    // this.message = message; // JavaScript의 this의 스코프 문제임
+                    instance.message = message;
+                });
+            }
+        })
+
+        
+    </script>
+
+
+</body>
+</html>

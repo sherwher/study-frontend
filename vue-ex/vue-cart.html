@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Cart</title>
+    <!-- Vue.js 로드 -->
+    <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <cart-header></cart-header>
+        <div v-show="showAll">
+            <h2>전체 목록</h2>
+            <ul>
+                <li v-for="item in items">{{item.name}}</li>
+            </ul>
+        </div>
+        <cart-footer></cart-footer>
+    </div>
+    <script>
+        Vue.component("cart-header", {
+            template: "<h1>{{ title }}</h1>",
+            data: function(){
+                return {
+                    title: "Vue Cart"
+                }
+            }
+        });
+
+        Vue.component("cart-footer", {
+            template: "<p>&copy; Bit Academy</p>"
+        });
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                showAll: true,
+                items: [
+                    { name: "무", buy: false },
+                    { name: "배추", buy: true },
+                    { name: "쪽파", buy: false },
+                    { name: "고춧가루", buy: false }
+                ]
+            },
+            
+        })
+    </script>
+</body>
+</html>
