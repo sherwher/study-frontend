@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>무비앱</title>
+    <!-- Vue.js 로드 -->
+    <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+    <!-- Axios 로드 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+      .movie img {
+        width: 100px;
+        height: 100px;
+        float: float;
+        object-fit: contain;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Pixar Movies</h1>
+    <!-- Vue 렌더링 영역 -->
+    <div id="app">
+      <!-- 개별 영화 정보 영역 -->
+      <div class="movie" v-for="movie in movies">
+        <img v-bind:src="'http://localhost:3000/images/' + movie.image" />
+        <h2>{{ movie.title }}</h2>
+        <p>{{ movie.director }}</p>
+        <p>{{ movie.year }}</p>
+      </div>
+    </div>
+
+    <script>
+      // axios.get("http://localhost:3000/movies")
+      // .then(
+      //     function(response) {
+      //         //성공
+      //         console.log(response);
+      //     }
+      // ).catch(
+      //     function(error){
+
+      //     }
+      // );
+      var app = new Vue({
+        el: "#app",
+        data: {
+          movies: []
+        },
+        created: function() {
+          var instance = this;
+          console.log("Loading Movies from API Server");
+          axios
+            .get("http://localhost:3000/movies")
+            .then(function(response) {
+              console.log(response.data.movies);
+              instance.movies = response.data.movies;
+            })
+            .catch(function(error) {
+              consloe.log(error);
+            });
+        }
+      });
+    </script>
+  </body>
+</html>
